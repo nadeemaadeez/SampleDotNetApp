@@ -110,7 +110,21 @@ pipeline:
             serviceDefinition:
               spec:
                 variables: []
-                manifests: []
+                manifests:
+                  - manifest:
+                      identifier: maifestapp
+                      type: K8sManifest
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: GithubConnectorMN
+                            gitFetchType: Branch
+                            paths:
+                              - .harness
+                            repoName: SampleDotNetApp
+                            branch: master
+                        skipResourceVersioning: false
               type: Kubernetes
           infrastructure:
             environmentRef: Devlopement_environment
