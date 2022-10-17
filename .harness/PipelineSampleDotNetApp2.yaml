@@ -110,23 +110,7 @@ pipeline:
             serviceDefinition:
               spec:
                 variables: []
-                manifests:
-                  - manifest:
-                      identifier: ManifestSampleapp
-                      type: K8sManifest
-                      spec:
-                        store:
-                          type: Github
-                          spec:
-                            connectorRef: GithubConnectorMN
-                            gitFetchType: Branch
-                            paths:
-                              - .harness
-                            repoName: SampleDotNetApp
-                            branch: master
-                        valuesPaths:
-                          - .harness/PipelineSampleDotNetApp2.yaml
-                        skipResourceVersioning: false
+                manifests: []
               type: Kubernetes
           infrastructure:
             environmentRef: Devlopement_environment
