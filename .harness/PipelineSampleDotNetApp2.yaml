@@ -112,17 +112,17 @@ pipeline:
                 variables: []
                 manifests:
                   - manifest:
-                      identifier: maifestapp
+                      identifier: manifestkubeweb
                       type: K8sManifest
                       spec:
                         store:
-                          type: Github
+                          type: Git
                           spec:
-                            connectorRef: GithubConnectorMN
+                            connectorRef: GitKubeWebsiteConnector
                             gitFetchType: Branch
                             paths:
                               - content/en/examples/application/nginx-app.yaml
-                            repoName: SampleDotNetApp
+                            repoName: https://github.com/nadeemaadeez/website
                             branch: main
                         skipResourceVersioning: false
               type: Kubernetes
