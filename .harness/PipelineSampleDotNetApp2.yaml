@@ -121,11 +121,11 @@ pipeline:
                             connectorRef: GithubConnectorMN
                             gitFetchType: Branch
                             paths:
-                              - .harness
+                              - harness
                             repoName: SampleDotNetApp
                             branch: master
                         valuesPaths:
-                          - .harness/PipelineSampleDotNetApp2.yaml
+                          - harness/PipelineSampleDotNetApp2.yaml
                         skipResourceVersioning: false
               type: Kubernetes
           infrastructure:
