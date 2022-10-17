@@ -39,3 +39,56 @@ pipeline:
                       type: branch
                       spec:
                         branch: master
+    - stage:
+        name: Jira Process
+        identifier: Jira_Process
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: Create Story
+                  identifier: Create_Story
+                  type: JiraCreate
+                  timeout: 2m
+                  spec:
+                    connectorRef: HarnessJiraConnector
+                    projectKey: HAR
+                    issueType: Story
+                    fields:
+                      - name: Summary
+                        value: The Harness workflow created
+              - step:
+                  name: Jira Approval
+                  identifier: Jira_Approval
+                  type: JiraApproval
+                  timeout: 3m
+                  spec:
+                    approvalCriteria:
+                      type: KeyValues
+                      spec:
+                        matchAnyCondition: true
+                        conditions:
+                          - key: Status
+                            operator: equals
+                            value: To Do
+                    rejectionCriteria:
+                      type: KeyValues
+                      spec:
+                        matchAnyCondition: true
+                        conditions: []
+                    connectorRef: HarnessJiraConnector
+                    projectKey: HAR
+                    issueType: Story
+                    issueKey: HAR-27
+              - step:
+                  name: Jira Update
+                  identifier: Jira_Update
+                  type: JiraUpdate
+                  timeout: 3m
+                  spec:
+                    connectorRef: HarnessJiraConnector
+                    issueKey: HAR-27
+                    fields: []
+        tags: {}
