@@ -57,6 +57,8 @@ pipeline:
                     projectKey: HAR
                     issueType: Story
                     fields:
+                      - name: Comment
+                        value: Story Is created
                       - name: Summary
                         value: The Harness workflow created
               - step:
@@ -81,7 +83,7 @@ pipeline:
                     connectorRef: HarnessJiraConnector
                     projectKey: HAR
                     issueType: Story
-                    issueKey: HAR-27
+                    issueKey: <+pipeline.stages.Jira_Process.spec.execution.steps.Create_Story.issue.key>
               - step:
                   name: Jira Update
                   identifier: Jira_Update
@@ -89,6 +91,11 @@ pipeline:
                   timeout: 3m
                   spec:
                     connectorRef: HarnessJiraConnector
-                    issueKey: HAR-27
-                    fields: []
+                    issueKey: <+pipeline.stages.Jira_Process.spec.execution.steps.Create_Story.issue.key>
+                    transitionTo:
+                      transitionName: ""
+                      status: Done
+                    fields:
+                      - name: Comment
+                        value: Story is completed
         tags: {}
